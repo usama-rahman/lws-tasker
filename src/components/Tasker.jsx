@@ -2,6 +2,7 @@
 import TaskHeading from "./TaskHeading";
 import TaskBoard from "./TaskBoard";
 import { useState } from "react";
+import AddTaskModal from "./AddTaskModal";
 
 export default function Tasker() {
   const defaultTasks = {
@@ -15,19 +16,17 @@ export default function Tasker() {
   };
 
   const [tasks, setTasks] = useState([defaultTasks]);
-
-  const handleAddTsk = () => {
-    console.log("task Handled");
-  };
+  const [showAddTaskModal, setShowAddTaskModal] = useState(false);
 
   return (
     <>
       <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
+        {showAddTaskModal && <AddTaskModal />}
         <div className="mb-14 items-center justify-between sm:flex">
           <h2 className="text-2xl font-semibold max-sm:mb-4">Your Tasks</h2>
           <div className="flex items-center space-x-5">
             <button
-              onClick={handleAddTsk}
+              onClick={() => setShowAddTaskModal(true)}
               className="rounded-md bg-blue-500 px-3.5 py-2.5 text-sm font-semibold"
             >
               Add Task
