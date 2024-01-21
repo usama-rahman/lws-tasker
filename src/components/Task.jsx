@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-
 import { useState } from "react";
 import AddTaskModal from "./AddTaskModal";
 import { FaStar } from "react-icons/fa";
@@ -17,6 +16,12 @@ export default function Task() {
 
   const [tasks, setTasks] = useState([defaultTasks]);
   const [showAddTaskModal, setShowAddTaskModal] = useState(false);
+
+  function handelAddTask(newTask) {
+    console.log("Adding a Task ...", newTask);
+    setTasks([...tasks, newTask]);
+    setShowAddTaskModal(false);
+  }
 
   return (
     <section className="mb-20 flex justify-center" id="tasks">
@@ -63,7 +68,12 @@ export default function Task() {
             {/* <Tasker /> */}
 
             <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
-              {showAddTaskModal && <AddTaskModal />}
+              {showAddTaskModal && (
+                <AddTaskModal
+                  handelAddTask={handelAddTask}
+                  setShowAddTaskModal={setShowAddTaskModal}
+                />
+              )}
               <div className="mb-14 items-center justify-between sm:flex">
                 <h2 className="text-2xl font-semibold max-sm:mb-4">
                   Your Tasks
