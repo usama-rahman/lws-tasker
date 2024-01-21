@@ -23,6 +23,7 @@ export default function AddTaskModal({ onSave }) {
       [name]: value,
     });
   };
+
   return (
     <>
       <div className="bg-black bg-opacity-70 h-screen w-full z-10 absolute top-0 left-0"></div>

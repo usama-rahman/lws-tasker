@@ -1,5 +1,5 @@
 import SearchBox from "./SearchBox";
-import Tasker from "./Tasker";
+import Tasker from "../ui/Tasker";
 
 export default function Task() {
   return (

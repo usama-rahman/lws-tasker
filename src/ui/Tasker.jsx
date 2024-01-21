@@ -2,7 +2,7 @@
 import TaskHeading from "./TaskHeading";
 import TaskBoard from "./TaskBoard";
 import { useState } from "react";
-import AddTaskModal from "./AddTaskModal";
+import AddTaskModal from "../components/AddTaskModal";
 
 export default function Tasker() {
   const defaultTasks = {

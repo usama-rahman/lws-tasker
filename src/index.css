@@ -1,7 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@layer utilities {
+
+/* @layer utilities {
   td {
     @apply p-0;
   }
@@ -119,7 +120,7 @@ button,
 [type="button"],
 [type="reset"],
 [type="submit"] {
-  /* -webkit-appearance: button; */
+  
   background-color: transparent;
   background-image: none;
 }
@@ -137,7 +138,7 @@ progress {
   height: auto;
 }
 [type="search"] {
-  /* -webkit-appearance: textfield; */
+  
   outline-offset: -2px;
 }
 ::-webkit-search-decoration {
@@ -211,7 +212,6 @@ iframe,
 embed,
 object {
   display: block;
-  /* vertical-align: middle; */
 }
 img,
 video {
@@ -983,4 +983,4 @@ td {
 
 .\[\&\>td\]\:align-baseline > td {
   vertical-align: baseline;
-}
+} */
