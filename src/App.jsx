@@ -1,7 +1,7 @@
-import Footer from "./components/Footer";
-import { Header } from "./components/Header";
-import Hero from "./components/Hero";
 import Task from "./components/Task";
+import Footer from "./ui/Footer";
+import Header from "./ui/Header";
+import Hero from "./ui/Hero";
 
 export const App = () => {
   return (
