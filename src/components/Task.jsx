@@ -4,6 +4,8 @@ import AddTaskModal from "./AddTaskModal";
 import { FaStar } from "react-icons/fa";
 
 export default function Task() {
+  const [isFav, setIsFav] = useState(false);
+
   const defaultTasks = {
     id: crypto.randomUUID(),
     title: "Integration API",
@@ -11,7 +13,6 @@ export default function Task() {
       "Connect an existing API to a third-party database using secure methods and handle data exchange efficiently.",
     tags: ["web", "react", "js"],
     priority: "high",
-    isFav: true,
   };
 
   const [tasks, setTasks] = useState([defaultTasks]);
@@ -22,6 +23,10 @@ export default function Task() {
     setTasks([...tasks, newTask]);
     setShowAddTaskModal(false);
   }
+
+  const handelFaStart = () => {
+    setIsFav(!isFav);
+  };
 
   return (
     <section className="mb-20 flex justify-center" id="tasks">
@@ -123,8 +128,8 @@ export default function Task() {
                         key={item.id}
                         className="border-b border-[#2E3443] [&>td]:align-baseline [&>td]:px-4 [&>td]:py-2"
                       >
-                        <td>
-                          {item.isFav ? (
+                        <td onClick={handelFaStart}>
+                          {isFav ? (
                             <FaStar color="yellow" />
                           ) : (
                             <FaStar color="gray" />
