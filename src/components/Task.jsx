@@ -17,16 +17,37 @@ export default function Task() {
 
   const [tasks, setTasks] = useState([defaultTasks]);
   const [showAddTaskModal, setShowAddTaskModal] = useState(false);
+  const [taskToUpdate, setTaskToUpdate] = useState(null);
 
-  function handelAddTask(newTask) {
-    console.log("Adding a Task ...", newTask);
-    setTasks([...tasks, newTask]);
-    setShowAddTaskModal(false);
+  function handelAddTask(newTask, isAdd) {
+    if (isAdd) {
+      setTasks([...tasks, newTask]);
+    } else {
+      setTasks(
+        tasks.map((task) => {
+          if (task.id === newTask) {
+            return newTask;
+          }
+          return task;
+        })
+      );
+    }
+    handleCloseClick();
   }
 
   const handelFaStart = () => {
     setIsFav(!isFav);
   };
+
+  const handleEditTask = (task) => {
+    setTaskToUpdate(task);
+    setShowAddTaskModal(true);
+  };
+
+  function handleCloseClick() {
+    setShowAddTaskModal(false);
+    setTaskToUpdate(null);
+  }
 
   return (
     <section className="mb-20 flex justify-center" id="tasks">
@@ -77,6 +98,8 @@ export default function Task() {
                 <AddTaskModal
                   handelAddTask={handelAddTask}
                   setShowAddTaskModal={setShowAddTaskModal}
+                  taskToUpdate={taskToUpdate}
+                  setTaskToUpdate={setTaskToUpdate}
                 />
               )}
               <div className="mb-14 items-center justify-between sm:flex">
@@ -154,7 +177,12 @@ export default function Task() {
                         <td>
                           <div className="flex items-center justify-center space-x-3">
                             <button className="text-red-500">Delete</button>
-                            <button className="text-blue-500">Edit</button>
+                            <button
+                              onClick={() => handleEditTask(item)}
+                              className="text-blue-500"
+                            >
+                              Edit
+                            </button>
                           </div>
                         </td>
                       </tr>

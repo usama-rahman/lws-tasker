@@ -1,15 +1,25 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 
-export default function AddTaskModal({ handelAddTask, setShowAddTaskModal }) {
-  const [task, setTask] = useState({
-    id: crypto.randomUUID(),
-    title: "",
-    description: "",
-    tags: [],
-    priority: "",
-    isFav: false,
-  });
+export default function AddTaskModal({
+  handelAddTask,
+  setShowAddTaskModal,
+  taskToUpdate,
+  setTaskToUpdate,
+}) {
+  const [task, setTask] = useState(
+    taskToUpdate || {
+      id: crypto.randomUUID(),
+      title: "",
+      description: "",
+      tags: [],
+      priority: "",
+      isFav: false,
+    }
+  );
+
+  const [isAdd, setIsAdd] = useState(Object.is(taskToUpdate, null));
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -26,6 +36,7 @@ export default function AddTaskModal({ handelAddTask, setShowAddTaskModal }) {
   };
 
   const handleCancelModal = () => {
+    setTaskToUpdate(null);
     setShowAddTaskModal(false);
   };
 
@@ -36,7 +47,7 @@ export default function AddTaskModal({ handelAddTask, setShowAddTaskModal }) {
       <div className="flex justify-center items-center ">
         <form className="w-full max-w-[740px] rounded-xl border border-[#FEFBFB]/[36%]  bg-[#191D26] p-9 max-md:px-4  z-20 absolute">
           <h2 className="mb-9 text-center text-2xl font-bold text-white lg:mb-11 lg:text-[28px]">
-            Add New Task
+            {isAdd ? "Add New Task" : "Edit Task"}
           </h2>
 
           <div className="space-y-9 text-white lg:space-y-10">
@@ -105,12 +116,9 @@ export default function AddTaskModal({ handelAddTask, setShowAddTaskModal }) {
             <button
               type="submit"
               className="rounded bg-blue-600 px-4 py-2 text-white transition-all hover:opacity-80"
-              onClick={(e) => {
-                e.preventDefault();
-                handelAddTask(task);
-              }}
+              onClick={() => handelAddTask(task, isAdd)}
             >
-              Create new Task
+              Save
             </button>
           </div>
         </form>
