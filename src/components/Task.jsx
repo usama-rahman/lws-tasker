@@ -35,8 +35,11 @@ export default function Task() {
     handleCloseClick();
   }
 
-  const handelFaStart = () => {
-    setIsFav(!isFav);
+  const handelFaStart = (taskId) => {
+    const taskIndex = tasks.findIndex((task) => task.id === taskId);
+    const newTasks = [...tasks];
+    newTasks[taskIndex].isFav = !newTasks[taskIndex].isFav;
+    setTasks(newTasks);
   };
 
   const handleEditTask = (task) => {
@@ -151,7 +154,7 @@ export default function Task() {
                         key={item.id}
                         className="border-b border-[#2E3443] [&>td]:align-baseline [&>td]:px-4 [&>td]:py-2"
                       >
-                        <td onClick={handelFaStart}>
+                        <td onClick={() => handelFaStart(item.id)}>
                           {isFav ? (
                             <FaStar color="yellow" />
                           ) : (
